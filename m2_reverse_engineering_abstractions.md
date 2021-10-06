@@ -2,20 +2,13 @@
 
 ## Twisted
 
-- What is the abstraction? What dose it represent, and what is its purpose?
+Twisted uses the [IService Abstract][1] to represent any architectural entity that starts and stops. Typical items that fit this category include rendering scripts, network protocols, and real-time applications necessary for a web application to function. A developer that uses twisted can link predefined or custom services to their application cleanly and consistently, promoting usability and modifiability. Twisted allows multiple services to link to a single Application, as in most cases, robust web apps run several services to ensure a decent user experience.
 
-Twisted uses the [Service Abstract][1] to represents any web service, program, or protocol that stops and starts. A developer can include predefined, or custom services, necessary to make it rn there Application to make it run. If there Application requirers network file transfer they can include the FTP as a service and link it to there application.
+Instances of this abstraction contain a name, running state flag, and their parent service. The name variable is set with the method, setName() and is the identifier of the service. With a unique identifier for each service, a Developer can store them in a data structure and then retrieve them by identification. This convenient and straightforward identifier allows program flexibility, making it easier for a wide range of employments. Then there is the running state flag, which is a boolean representing if the process is running or not. The startService() and stopService() methods set the running state flag and contain the instructions set by the developer to start the service itself. The IService abstraction also contains a startPrivilegedService(). This method contains the instructions for initializing a service and runs before the startService(). Lastly, the parent variable contains the entity from which the service starts, which the developer implements and sets by the setServiceParent() and disownServiceParent(). Having a parent-child structure of service calls helps process organization for easy maintainability.
+
+In the source code, the Service abstraction plays a role in running Unix applications and Windows applications. Although the programs are not cross-OS compatible, Twisted supports both because of the IService abstraction's simplification. This abstraction frees the Software Architect's concern about program function and clarifies that linking guarantees compatibility as long as it starts and stops.
 
 [1]: https://github.com/SENG350UVic/twisted/blob/trunk/src/twisted/application/service.py "service.py source code"
-
-- A link to the top-level source file implementing the abstraction in the codebase
-- What is the key state that the abstraction contains and the key operations it supports? Please describe the state and operations conceptually rather then simply listing the number of variables and methods and focus on only the key state and operations. What is the key information the abstraction stores? What operations can be done with this information?
-
-Classes implementing this abstraction contain a name, running state, and parent. The name is set through methods setName() and is the identifier of the service. Then there is the running attribute which is a boolean of wether it is running or not. This is set by the two important state functions of startService() and stopService. It also contains a startPrivilegedService() this is the init for the service and runs before the startService(). Lastly is the parent, the parent is the upper service that calls another service and is set by setServiceParent() and disownServiceParent().
-
-- What are some common scenarios in which the abstraction is used? In what ways dose the abstraction make the scenarios simpler?
-
-The in the source code the Service abstraction plays a role in running Unix applications and Windows applications. This abstractions simplifies the extra entities that a service may have. If you can set up any service in this way you know that it will have a simple start and stop and that it will always work.
 
 ## Node
 
