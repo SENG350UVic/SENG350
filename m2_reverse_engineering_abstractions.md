@@ -10,26 +10,16 @@ In the source code, the Service abstraction plays a role in running Unix applica
 
 [1]: https://github.com/SENG350UVic/twisted/blob/trunk/src/twisted/application/service.py "service.py source code"
 
+
 ## Node
 
-For each of the 3 abstractions you found in part 1, you should write 1-2 paragraphs for EACH of the two additional systems answering the following questions:
+The closest abstraction to the IServce abstraction in Node.js is a [Process][2]. Since Node.js is an event-driven runtime, it handles [processes][3] concurrently and doesn't explicitly run them but instead listens for them. Until there is a request to the Node.js Application by said Process, Node.js remains idle or works on another process. However, a Process has methods to log, kill, change running directory, and much more functions than the IServerce. Although they both represent objects that run and perform a task, the Node developers design the Process as an object that works in a different model. The Process makes developing easier as it includes diagnostics for debugging and testing; however, it is limited by only having stop controls and cannot start without having a separate call to run it. Although this seems to limit the Developer, the creators at Node.js choose the essentialist approach, only including functions and features detrimental to the abstraction
 
-- What is the closest abstraction or abstractions to the abstraction in your reference system?
-
-- A link to the top-level source file(s) implementing the abstraction(s) in the codebase
-
-- In what ways is the abstraction different and the same? For example, does it use completely different elements that represent state and operations differently? In what ways are the operations supported by the abstraction similar? In what ways are they different?
-
-- What are the pros and cons for the abstraction used in this system? In what ways does this abstraction make typical scenarios easier? In what does this abstraction make typical scenarios harder?
+[2]: https://github.com/SENG350UVic/node/blob/SENG350_Modifications/lib/process.js "process implamentation"
+[3]: https://github.com/SENG350UVic/node/blob/SENG350_Modifications/doc/api/process.md "process info and usage"
 
 ## Flask
 
-For each of the 3 abstractions you found in part 1, you should write 1-2 paragraphs for EACH of the two additional systems answering the following questions:
+The Flask abstraction is the closest to Twisted's IService. Flask uses the [Flask Abstraction][4] as the central object responsible for Application control, protocol management, and service management. Flask's broad range of functions makes it fundamentally different from IService, which in contrast, contains only the Process and Protocol control that run on the Application. Nowhere in IService do they have higher-level control of the Application. Unfortunately, Flask does not have a modular design, and therefore, the Developer must do the tedious work of looking up these functions to ensure they use them appropriately. However, this design allows for all the functional tools to exist in one place, so finding the source code does not require searching multiple directories. Having central control over your applications, with readily available tools, gives the Developer a user-friendly experience with the codebase.
 
-- What is the closest abstraction or abstractions to the abstraction in your reference system?
-
-- A link to the top-level source file(s) implementing the abstraction(s) in the codebase
-
-- In what ways is the abstraction different and the same? For example, does it use completely different elements that represent state and operations differently? In what ways are the operations supported by the abstraction similar? In what ways are they different?
-
-- What are the pros and cons for the abstraction used in this system? In what ways does this abstraction make typical scenarios easier? In what does this abstraction make typical scenarios harder?
+[4]: https://github.com/pallets/flask/blob/main/src/flask/app.py "Flask Class"
