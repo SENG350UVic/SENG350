@@ -1,1 +1,10 @@
-Hello I am stefan
+# Milestone 2: Reverse Engineering Abstractions
+Name: Raphael Bassot
+Course: SENG350 - Software Architecture
+Group: #2
+
+# Part 1: Abstractions in the Reference System - Twisted
+### Abstraction: Deferred Objects
+One important abstraction that Twisted makes use of is the concept of a *Deferred* object to help organize the consequences that follow event-driven programming. A Deferred object is a type of abstraction that is in essence ["a promise that a function [returning a Deferred object] will return at some point"](http://aosabook.org/en/twisted.html). This abstraction's purpose revolves around the nature of callback functions - executables that are passed as arguments to a parent function that typically execute after the parent has completed its work. In event-driven programming, callbacks execute asynchronously, which means they can execute sometime later on, independently of other running code. The implementation of asynchronous callbacks is what allows Twisted to follow event-driven design. Event-driven programming involves a continuously-executing event loop that detects event triggers (termination). Completed events trigger callback functions, which describe how the event that just ended in an application should be handled (post-completion behaviour). Multiple events completing can result in a chain of callbacks being called, which can become confusing to follow for the developer. Deferred objects help abstract away exactly this issue; two distinct callback chains, one for success case and another for failure case, are created, each holding ["references to all of the callbacks registered for an event"](http://aosabook.org/en/twisted.html). This means that the Deferred object can be more easily passed around as a single object in code that holds both execution paths determined by the callback chains it is referencing.
+
+In the Twisted code repository, the Deferred abstraction is implemented in the `defer.py` file in source code. The path to this file is: `\twisted\src\twisted\internet\defer.py`. From here, many other Twisted services instantiate Deferred objects that are modelled by the class description in this file.
