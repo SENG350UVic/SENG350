@@ -8,15 +8,15 @@ Instances of this abstraction contain a name, running state flag, and their pare
 
 In the source code, the Service abstraction plays a role in running Unix applications and Windows applications. Although the programs are not cross-OS compatible, Twisted supports both because of the IService abstraction's simplification. This abstraction frees the Software Architect's concern about program function and clarifies that linking guarantees compatibility as long as it starts and stops.
 
-[1]: https://github.com/SENG350UVic/twisted/blob/trunk/src/twisted/application/service.py "service.py source code"
+[1]: https://github.com/twisted/twisted/blob/trunk/src/twisted/application/service.py "service.py source code"
 
 
 ## Node
 
 The closest abstraction to the IServce abstraction in Node.js is a [Process][2]. Since Node.js is an event-driven runtime, it handles [processes][3] concurrently and doesn't explicitly run them but instead listens for them. Until there is a request to the Node.js Application by said Process, Node.js remains idle or works on another process. However, a Process has methods to log, kill, change running directory, and much more functions than the IServerce. Although they both represent objects that run and perform a task, the Node developers design the Process as an object that works in a different model. The Process makes developing easier as it includes diagnostics for debugging and testing; however, it is limited by only having stop controls and cannot start without having a separate call to run it. Although this seems to limit the Developer, the creators at Node.js choose the essentialist approach, only including functions and features detrimental to the abstraction
 
-[2]: https://github.com/SENG350UVic/node/blob/SENG350_Modifications/lib/process.js "process implamentation"
-[3]: https://github.com/SENG350UVic/node/blob/SENG350_Modifications/doc/api/process.md "process info and usage"
+[2]: https://github.com/nodejs/node/blob/master/lib/process.js "process implementation"
+[3]: https://github.com/nodejs/node/blob/master/doc/api/process.md "process info and usage"
 
 ## Flask
 
