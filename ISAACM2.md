@@ -19,7 +19,7 @@ The two abstractions are similar in that they abstract out operating system intr
 
 Flask appears to use Python's [`os`](https://docs.python.org/3/library/os.html) module, which was designed by the Python team. As a result, Flask does contain any extra software infrastructure beyond what is already available in Python to handle operating system communication. For example, in [`cli.py`](https://github.com/pallets/flask/blob/main/src/flask/cli.py), the `os` module is used to format string paths as they would need to be formatted for the operating system. Python separates thread-handling to the [`_thread`](https://docs.python.org/3/library/threading.html) module, which as of Python version 3.7, is now available by default in all Python applications.
 
-Flask is designed to be 'simple but extensible'[1], which helps to explain this decision. Developers using Flask can use Flask with Python's `os` and `_thread` modules out-of-the-box, or they can add their own functionality via Flask extensions[2].
+Flask is designed to be 'simple but extensible'[1], which helps to explain this decision. Developers using Flask can use Flask with Python's `os` and `_thread` modules out-of-the-box, or they can add their own functionality via Flask extensions[2]. There is no fair comparison between Twisted and Flask's use of abstractions for the operating system consistency scenario, as they are designed with different intentions.
 
 [1]: https://flask.palletsprojects.com/en/2.0.x/
 [2]: https://flask.palletsprojects.com/en/2.0.x/extensions/
