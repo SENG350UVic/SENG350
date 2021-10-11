@@ -1,4 +1,4 @@
-# SENG_350_GROUP
+# SENG 350 GROUP
 
 The empire of Raprap, El Stefano, Jigga Yasa and Suga Shaha.
 
