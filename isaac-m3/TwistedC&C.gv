@@ -1,0 +1,148 @@
+digraph sample {
+    graph [ranksep=0];
+    node [shape=record];
+
+	Reactor [
+		label=<{
+			<FONT POINT-SIZE="24.0">
+				Reactor
+			</FONT>|
+			Instance of 
+			<FONT FACE="monospace">
+				class EPollReactor
+			</FONT>
+		}>
+		pos="0,0!"
+	];
+
+	SystemEvent1 [
+		label=<{
+			<FONT POINT-SIZE="24.0">
+				System Event
+			</FONT>|
+			<FONT FACE="bold monospace">
+				CLIENT_ACCEPTED
+			</FONT>
+		}>
+		pos="-2,3!"
+	];
+
+	SystemEvent2 [
+		label=<{
+			<FONT POINT-SIZE="24.0">
+				System Event
+			</FONT>|
+			<FONT FACE="monospace">
+				SERVER_DATA
+			</FONT>
+		}>
+		pos="2,3!"
+	];
+
+	Function1 [
+		label=<{
+			<FONT POINT-SIZE="24.0">
+				Function
+			</FONT>|
+			<FONT FACE="monospace">
+				function registerClient()
+			</FONT>
+		}>
+		pos="-6,0!"
+	];
+
+	ProcessManager [
+		label=<{
+			<FONT POINT-SIZE="24.0">
+				Process Manager
+			</FONT>
+		}>
+		pos="0,-2!"
+	];
+
+	SystemEvent1 -> Reactor [
+		headlabel="Event Fired"
+		labeldistance=13
+		labelangle=20
+	];
+
+	Reactor -> SystemEvent2 [
+		taillabel="Fire Event"
+		labeldistance=13
+		labelangle=-20
+	];
+
+	Reactor -> Reactor [
+		xlabel="Continuous Polling for New Events"
+	];
+
+	Reactor -> Function1 [
+		taillabel="Bind Function to\n System Event"
+		labeldistance=10
+		labelangle=0
+	];
+
+	Reactor -> ProcessManager [
+		headlabel="Spawn Process"
+		labeldistance=5
+		labelangle=-6
+	]
+
+
+}
+
+// digraph G {
+//     edge [label=0];
+//     graph [ranksep=0];
+//     node [shape=record];
+//     T [label="{{T|8}|000}"];
+//     W [label="{{W|4}|0010}"];
+//     M [label="{{M|2}|00110}"];
+//     Y [label="{{Y|3}|00111}"];
+//     A [label="{{A|5}|0100}"];
+//     H [label="{{H|5}|0101}"];
+//     O [label="{{O|5}|0110}"];
+//     I [label="{{I|3}|01110}"];
+//     R [label="{{R|3}|01111}"];
+//     E [label="{{E|11}|100}"];
+//     L [label="{{L|6}|1010}"];
+//     S [label="{{S|6}|1011}"];
+//     V [label="{{V|1}|1100000}"];
+//     COMA [label="{{COMA|1}|1100001}"];
+//     G [label="{{G|1}|1100010}"];
+//     U [label="{{U|1}|1100011}"];
+//     GU [label=2];
+//     N [label="{{N|4}|11001}"];
+//     B [label="{{B|2}|110100}"];
+//     D [label="{{D|2}|110101}"];
+//     BD [label=4];
+//     DOT [label="{{DOT|1}|1101100}"];
+//     C [label="{{C|1}|1101101}"];
+//     DOTC [label=2];
+//     F [label="{{F|2}|110111}"];
+//     DOTCF [label=4];
+//     BDDOTCF [label=8];
+//     SPACE [label="{{SPACE|16}|111}"];
+//     93 -> 38 -> 17 -> T;
+//     9 -> W;
+//     5 -> M;
+//     21 -> 10 -> A;
+//     11 -> O;
+//     6 -> I;
+//     55 -> 23 -> E;
+//     12 -> L;
+//     32 -> 16 -> 8 -> 4 -> 2 -> V;
+//     GU -> G;
+//     BDDOTCF -> BD -> B;
+//     DOTCF -> DOTC -> DOT;17 -> 9 -> 5 -> Y [label=1];
+//     10 -> H [label=1];
+//     38 -> 21 -> 11 -> 6 -> R [label=1];
+//     23 -> 12 -> S [label=1];
+//     2 -> COMA [label=1];
+//     4 -> GU -> U [label=1];
+//     8 -> N [label=1];
+//     BD -> D [label=1];
+//     DOTC -> C [label=1];
+//     16 -> BDDOTCF -> DOTCF -> F [label=1];
+//     93 -> 55 -> 32 -> SPACE [label=1];
+// }
