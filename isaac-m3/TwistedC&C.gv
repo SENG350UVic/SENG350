@@ -1,28 +1,50 @@
-digraph sample {
+digraph CAndC {
     graph [ranksep=0];
     node [shape=record];
 
-	Reactor [
-		label=<{
-			<FONT POINT-SIZE="24.0">
-				Reactor
-			</FONT>|
-			Instance of 
-			<FONT FACE="monospace">
-				class EPollReactor
-			</FONT>
-		}>
-		pos="0,0!"
-	];
+	subgraph cluster_reactor {
 
-	EventQueue [
-		label=<{
-			<FONT POINT-SIZE="24.0">
-				Event Queue
-			</FONT>
-		}>
-		pos="0,3!"
-	];
+		style=dotted;
+
+		TL [
+			pos="-1.75,3.5!"
+			style="invisible"
+		];
+		TR [
+			pos="4.75,3.5!"
+			style="invisible"
+		];
+		BL [
+			pos="-1.75,-0.5!"
+			style="invisible"
+		];
+		BR [
+			pos="4.75,-0.5!"
+			style="invisible"
+		];
+
+		Reactor [
+			label=<{
+				<FONT POINT-SIZE="24.0">
+					Reactor
+				</FONT>|
+				Instance of 
+				<FONT FACE="monospace">
+					class EPollReactor
+				</FONT>
+			}>
+			pos="0,0!"
+		];
+
+		EventQueue [
+			label=<{
+				<FONT POINT-SIZE="24.0">
+					Event Queue
+				</FONT>
+			}>
+			pos="0,3!"
+		];
+	}
 
 	SystemEvent1 [
 		label=<{
