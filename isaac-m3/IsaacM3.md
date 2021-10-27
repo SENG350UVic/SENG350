@@ -5,7 +5,7 @@ The biggest strength of event-driven architectures lies in it's ability to work 
 
 ![](TwistedC&C.png)
 
-The above diagram outlining the event-driven architecture contains the types of modules in large text, one example of such module encapsulated in smaller text below, and actions performed which require one module to communicate with another module (some of these modules exist outside of the Twisted codebase). The developer assigns events to the reactor's queue, and system events are then interpreted by the reactor. From the perspective of a developer using Twisted, they concern themselves with the assignment of events to the reactor as opposed to the order in which events are handled or the methods of delegating operations to system hardware. Deferred objects[[3]](#3) and locks handle these matters, and a process manager which is made up largely by the system handles the interactions between event-scheduling and hardware usage.
+The above diagram outlining the event-driven architecture contains the types of modules in large text, one example of such module encapsulated in smaller text below, and actions performed which require one module to communicate with another module (some of these modules exist outside of the Twisted codebase). The dotted subgraph contains the work done by the reactor module[[4]](#4). The developer assigns events to the reactor's queue, and system events are then interpreted by the reactor. From the perspective of a developer using Twisted, they concern themselves with the assignment of events to the reactor as opposed to the order in which events are handled or the methods of delegating operations to system hardware. Deferred objects[[3]](#3) and locks handle these matters, and a process manager which is made up largely by the system handles the interactions between event-scheduling and hardware usage.
 
 <a id="1">[1]</a>
 https://www.sensedia.com/post/events-event-driven-architecture-and-async-apis-wt
@@ -15,3 +15,6 @@ https://web.archive.org/web/20161002141057/http://esocc2016.eu/wp-content/upload
 
 <a id="3">[3]</a>
 http://aosabook.org/en/twisted.html
+
+<a id="4">[4]</a>
+https://github.com/twisted/twisted/blob/trunk/src/twisted/internet/epollreactor.py
