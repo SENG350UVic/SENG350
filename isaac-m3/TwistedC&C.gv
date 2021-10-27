@@ -15,6 +15,15 @@ digraph sample {
 		pos="0,0!"
 	];
 
+	EventQueue [
+		label=<{
+			<FONT POINT-SIZE="24.0">
+				Event Queue
+			</FONT>
+		}>
+		pos="0,3!"
+	];
+
 	SystemEvent1 [
 		label=<{
 			<FONT POINT-SIZE="24.0">
@@ -24,7 +33,7 @@ digraph sample {
 				CLIENT_ACCEPTED
 			</FONT>
 		}>
-		pos="-2,3!"
+		pos="-2,6!"
 	];
 
 	SystemEvent2 [
@@ -36,7 +45,7 @@ digraph sample {
 				SERVER_DATA
 			</FONT>
 		}>
-		pos="2,3!"
+		pos="2,6!"
 	];
 
 	Function1 [
@@ -60,16 +69,24 @@ digraph sample {
 		pos="0,-2!"
 	];
 
-	SystemEvent1 -> Reactor [
+	SystemEvent1 -> EventQueue [
 		headlabel="Event Fired"
 		labeldistance=13
 		labelangle=20
 	];
 
-	Reactor -> SystemEvent2 [
-		taillabel="Fire Event"
+	SystemEvent2 -> EventQueue [
+		headlabel="Event Fired"
 		labeldistance=13
 		labelangle=-20
+	];
+
+	EventQueue -> Reactor;
+	EventQueue -> Reactor;
+	EventQueue -> Reactor [
+		headlabel="Stream of Events"
+		labeldistance=12
+		labelangle=40
 	];
 
 	Reactor -> Reactor [
