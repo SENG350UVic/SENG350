@@ -89,7 +89,7 @@ digraph sample {
 		labelangle=40
 	];
 
-	Reactor -> Reactor [
+	EventQueue -> EventQueue [
 		xlabel="Continuous Polling for New Events"
 	];
 
