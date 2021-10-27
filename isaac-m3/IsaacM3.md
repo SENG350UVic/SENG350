@@ -15,7 +15,9 @@ From the perspective of a developer using Twisted, they concern themselves with 
 
 <a id="1">[1]</a>
 https://en.wikipedia.org/wiki/Event-driven_architecture
+
 <a id="2">[2]</a>
 https://web.archive.org/web/20161002141057/http://esocc2016.eu/wp-content/uploads/2016/04/Leymann-Keynote-ESOCC-2016.pdf
+
 <a id="3">[3]</a>
 http://aosabook.org/en/twisted.html
