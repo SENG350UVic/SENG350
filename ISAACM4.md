@@ -19,10 +19,21 @@ Twisted achieves this in two ways:
 		from twisted.internet.selectreactor import install
 		return install
 	```
-In reality, the decision made by the program at runtime is not easily readable from the code excerpt. It turns out that the `epollreactor` is used on Linux, the `pollreactor` is used on other non-MacOS POSIX-compliant systems (such as Microsoft Windows), and the `selectreactor` is used everywhere else (including MacOS).
+In reality, the decision made by the program at runtime is not easily readable from the code excerpt. It turns out that the `epollreactor` is specified on Linux, the `pollreactor` is specified on other non-MacOS POSIX-compliant systems, and the `selectreactor` is specified everywhere else (including MacOS and Windows).
+
+- If a specific reactor is desired by the developer using Twisted, they can install only that reactor. Twisted will then use the reactor and override the default **if the installed reactor is compatible with the operating system**[[3]]. Consider the following code excerpt from the Twisted documentation, which shows how to specify the `selectreactor` as the default reactor in Python:
+	```python
+	from twisted.internet import selectreactor
+	selectreactor.install()
+
+	from twisted.internet import reactor
+	```
 	
 <a id="1">[1]</a>
 https://github.com/twisted/twisted/blob/trunk/src/twisted/internet/default.py
 
 <a id="2">[2]</a>
 https://springframework.guru/gang-of-four-design-patterns/strategy-pattern/
+
+<a id="3">[3]</a>
+https://twistedmatrix.com/documents/13.1.0/core/howto/choosing-reactor.html
