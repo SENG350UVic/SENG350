@@ -67,7 +67,7 @@ https://github.com/nodejs/node/blob/master/lib/events.js
 
 ## Flask
 
-Flask does not inherently use an event loop. It turns out that, since Flask is a micro web framework and Twisted is an event-driven networking engine, Twisted can be used with Flask. This helps to explain why Flask, being designed to work out-of-the-box with minimal features, does not have an event loop by default. However, Flask developers can use asynchronous event loop modules outside of Flask, such as the `asyncio` module from Python.[[9]](#9)
+Flask does not inherently use an event loop. It turns out that, since Flask is a micro web framework and Twisted is an event-driven networking engine, Twisted can be used with Flask. This helps to explain why Flask, being designed to work out-of-the-box with minimal features, does not have an event loop by default. However, Flask developers can use asynchronous event loop modules outside of Flask, such as the `asyncio` module from Python.[[9]](#9) As with every Flask element discussed in this project thus far, Flask has always adopted the same solution of "let the developer add it on their own, if they really want it". As a result, there are no Flask-specific classes or files used to solve this problem. Rather, Flask treats an event loop as an extra opportunity for customization rather than a base feature. This, of course, means extra work for developers who want to use an event loop, but mitigating that work would go against the microframework ideology.
 
 <a id="9">[9]</a>
 https://docs.python.org/3/library/asyncio.html
