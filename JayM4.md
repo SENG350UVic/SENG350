@@ -6,7 +6,7 @@ Object Oriented Programming allows reusing portions of existing code by creating
 
 The adapter pattern is a software design pattern that allows the interface of an existing class to be used as another interface, often used to make existing classes work with others without modifying the course code. Twisted supports delegation instead of inheritance where appropriate. This means asking another object to perform a task for the object at hand. To support this component design pattern, Twisted uses adapters, objects which implement an interface for another object type. The superclass-subclass relationship is said to be an *is-a* relationship [[2]](https://twistedmatrix.com/documents/current/core/howto/components.html) [[3]](https://twistedmatrix.com/documents/13.1.0/core/howto/design.html#auto1).
 
-![Figure XX: UML diagram of adapter pattern](/Users/jay/Documents/Study/Seng350/Twisted/Adapter--Design-Pattern-.png)
+![Figure XX: UML diagram of adapter pattern](Adapter--Design-Pattern-.png)
 
 Classes and objects are involved and calls are made to the instance of the wrapped object. Examples of use can be seen in .
 
