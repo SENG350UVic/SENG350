@@ -31,6 +31,8 @@ In reality, the decision made by the program at runtime is not easily readable f
 
 The default reactor based on the operating system is defined in `default.py` in the `_getInstallFunction` function.[[1]](#1) The different reactors are located in their own files and classes. One such example is the `epollreactor`.[[4]](#4) Each of these reactors is bound by multiple interfaces: from `twisted/src/twisted/internet/interfaces.py`[[5]](#5), `twisted/src/twisted/internet/posixbase.py`.[[6]](#6) Thus, each reactor is bound to the same set of methods and each achieve the same functionality via different algorithms, adhering to the Strategy Design Pattern.
 
+This design, aligning with the Strategy Design Pattern, benefits from structural consistency within the codebase. Developers can use the interfaces provided for reactors to realize what methods are implemented, and developers can switch reactors or even operating systems without having to re-write any Twisted code (in the case of the event-loop).
+
 <a id="1">[1]</a>
 https://github.com/twisted/twisted/blob/trunk/src/twisted/internet/default.py
 
@@ -53,7 +55,7 @@ https://github.com/twisted/twisted/blob/trunk/src/twisted/internet/posixbase.py
 
 Node.js also contains the usage of an event loop. However, all event management is handled by Node.js. The reactors are not exposed to the developer. However, the methods for the reactors, such as adding and removing event listeners, are exposed, just as they are in Twisted. This implementation can be well-described by the **Chain-of-Responsibility** Design Pattern. This problem also exists in Twisted, but Node.js has no problem closer to Twisted's default reactor workflow than a problem that Twisted also has.
 
-In the case of Node.js, this is solved via the `events.js` module, which provides functions for developers to *add and remove listeners* to the hidden underlying reactor. Without creating or modifying the reactor, developers using Node.js can ensure that their tasks are scheduled in the reactor[[7]](#7)[[8]](#8).
+In the case of Node.js, this is solved via the `events.js` module, which provides functions for developers to *add and remove listeners* to the hidden underlying reactor. Without creating or modifying the reactor, developers using Node.js can ensure that their tasks are scheduled in the reactor.[[7]](#7)[[8]](#8)
 
 <a id="7">[7]</a>
 https://nodejs.org/api/events.html
