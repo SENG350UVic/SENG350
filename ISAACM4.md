@@ -4,7 +4,7 @@ In Twisted, different reactors are choosed based on the operating system in orde
 
 Twisted achieves this in two ways:
 - A default reactor is chosen based on the operating system. Consider the following code excerpt from `twisted/src/internet/default.py`[[1]](#1):
-```
+```python
 try:
 	if platform.isLinux():
 		try:
