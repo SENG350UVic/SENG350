@@ -19,6 +19,7 @@ Twisted achieves this in two ways:
 		from twisted.internet.selectreactor import install
 		return install
 	```
+In reality, the decision made by the program at runtime is not easily readable from the code excerpt. It turns out that the `epollreactor` is used on Linux, the `pollreactor` is used on other non-MacOS POSIX-compliant systems (such as Microsoft Windows), and the `selectreactor` is used everywhere else (including MacOS).
 	
 <a id="1">[1]</a>
 https://github.com/twisted/twisted/blob/trunk/src/twisted/internet/default.py
