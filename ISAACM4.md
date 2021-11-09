@@ -4,21 +4,21 @@ In Twisted, different reactors are choosed based on the operating system in orde
 
 Twisted achieves this in two ways:
 - A default reactor is chosen based on the operating system. Consider the following code excerpt from `twisted/src/internet/default.py`[[1]](#1):
-```python
-try:
-	if platform.isLinux():
-		try:
-			from twisted.internet.epollreactor import install
-		except ImportError:
+	```python
+	try:
+		if platform.isLinux():
+			try:
+				from twisted.internet.epollreactor import install
+			except ImportError:
+				from twisted.internet.pollreactor import install
+		elif platform.getType() == "posix" and not platform.isMacOSX():
 			from twisted.internet.pollreactor import install
-	elif platform.getType() == "posix" and not platform.isMacOSX():
-		from twisted.internet.pollreactor import install
-	else:
+		else:
+			from twisted.internet.selectreactor import install
+	except ImportError:
 		from twisted.internet.selectreactor import install
-except ImportError:
-	from twisted.internet.selectreactor import install
-	return install
-```
+		return install
+	```
 	
 <a id="1">[1]</a>
 https://github.com/twisted/twisted/blob/trunk/src/twisted/internet/default.py
