@@ -51,11 +51,13 @@ https://github.com/twisted/twisted/blob/trunk/src/twisted/internet/interfaces.py
 <a id="6">[6]</a>
 https://github.com/twisted/twisted/blob/trunk/src/twisted/internet/posixbase.py
 
-# Node.js: The Strategy Pattern
+# Additional System Design Patterns
+
+## Node.js
 
 Node.js also contains the usage of an event loop. However, all event management is handled by Node.js. The reactors are not exposed to the developer. However, the methods for the reactors, such as adding and removing event listeners, are exposed, just as they are in Twisted. This implementation can be well-described by the **Chain-of-Responsibility** Design Pattern. This problem also exists in Twisted, but Node.js has no problem closer to Twisted's default reactor workflow than a problem that Twisted also has.
 
-In the case of Node.js, this is solved via the `events.js` module, which provides functions for developers to *add and remove listeners* to the hidden underlying reactor. Without creating or modifying the reactor, developers using Node.js can ensure that their tasks are scheduled in the reactor.[[7]](#7)[[8]](#8)
+In the case of Node.js, this is solved via the `events.js` module, which provides functions for developers to *add and remove listeners* to the hidden underlying reactor. Without creating or modifying the reactor, developers using Node.js can ensure that their tasks are scheduled in the reactor.[[7]](#7)[[8]](#8) The main drawback to this workflow is that developers have no control over the efficiency of the reactor; the implementation of the underlying reactor is inaccessible to developers. Developers also cannot specify a reactor of their liking. This turns out to be a negligible issue for a large majority of developers.
 
 <a id="7">[7]</a>
 https://nodejs.org/api/events.html
@@ -63,3 +65,9 @@ https://nodejs.org/api/events.html
 <a id="8">[8]</a>
 https://github.com/nodejs/node/blob/master/lib/events.js
 
+## Flask
+
+Flask does not inherently use an event loop. It turns out that, since Flask is a micro web framework and Twisted is an event-driven networking engine, Twisted can be used with Flask. This helps to explain why Flask, being designed to work out-of-the-box with minimal features, does not have an event loop by default. However, Flask developers can use asynchronous event loop modules outside of Flask, such as the `asyncio` module from Python.[[9]](#9)
+
+<a id="9">[9]</a>
+https://docs.python.org/3/library/asyncio.html
