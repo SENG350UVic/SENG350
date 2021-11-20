@@ -9,7 +9,7 @@ Group: #2
 
 Twisted implements the Cookbook programming style in their code, ["where the larger problem is divided into *procedures* each doing one thing"](https://learning-oreilly-com.ezproxy.library.uvic.ca/library/view/exercises-in-programming/9781482227376/K22536_C004.xhtml#c04_sec001). The codebase demonstrates examples of utilizing shared global variables to save state and have this state be accessed by different subroutines in the same module.
 
-Similar to Twisted programming style, Node.js also employs the Cookbook style in specific areas in the codebase. The concrete problem situation that Node.js solves with this style is creating a basic blocking program for an SSL connection to be served, in a file named `saccept.c`. This file can be found in the codebase at the following relative path: `/deps/openssl/openssl/demos/bio/saccept.c`.
+Similar to Twisted programming style, Node.js also employs the **Cookbook** style in specific areas in the codebase. The concrete problem situation that Node.js solves with this style is creating a basic blocking program for an SSL connection to be served, in a file named `saccept.c`. This file can be found in the codebase at the following relative path: `/deps/openssl/openssl/demos/bio/saccept.c`.
 
 A portion of the source code that demonstrates the Cookbook style used in `saccept.c` can be seen below. `saccept.c` can be seen as the server-side handling of an SSL connection that is created between a client and server entity. The program uses a global `done` variable, that acts as a server interrupt flag to act upon interruption or duplicate calls to the `saccept` function. Should it be interrupted, the global flag is set to `1`, and the loop in the main function - that is continually accepting data from the client - breaks and terminates gracefully. The difficulty with these tasks is having to handle them at the same time, while keeping the codebase legible and easy to follow along.
 
@@ -53,3 +53,46 @@ The consequences of this solution that implements the Cookbook programming style
 
 
 ### Programming Style #2 - Abstract Things
+
+Twisted middleware makes use of the **Abstract Things** programming style in their source code. Similarly, Node.js employs the **Abstract Things** style in their code to decouple the abstract object and its concrete implementation, and create reusable code.
+
+Node.js is built on top of the V8 JavaScript engine, whose main purpose is to ["translate JavaScript code into executable machine code"](https://blog.appsignal.com/2020/07/01/a-deep-dive-into-v8.html). Relying on C++ to perform computations, the V8 engine is very fast and allows Node to load web browser information quickly. On top of this, V8 also needs to handle webpage visuals and HTML, and therefore a large toolset was created. Among these tools is Turbolizer - an HTML-based code visualizer for the phases throughout the Turbofan optimization pipeline. Turbofan is an optimizing compiler for machine code, and Turbolizer allows developers to visualize the work performed by Turbofan in a formatted HTML webpage. The main problem that the Turbolizer needs to solve is how to handle multiple types of views that can be analyzed (and displayed in HTML) during the code compilation. Basic information, code chunks, and graphs need to be displayed to the developer; the various view types share many attributes, but are unique in a way.
+
+The V8 engine solves this problem through the use of Abstract Things. The Turbolizer leverages a base `View` abstract class, that is implemented in multiple ways for the numerous views that the tool requires. The abstract class and all concrete implementations can be found in the following directory: `deps\v8\tools\turbolizer\src\`. One implementation - the `CodeView` - can be partially seen below, alongside the abstract class, both of which are written in TypeScript.
+
+```
+export abstract class View {
+  protected container: HTMLElement;
+  protected divNode: HTMLElement;
+  protected abstract createViewElement(): HTMLElement;
+
+  constructor(idOrContainer: string | HTMLElement) {
+    ...
+  }
+}
+...
+
+export class CodeView extends View {
+  broker: SelectionBroker;
+  source: Source;
+  sourceResolver: SourceResolver;
+  codeMode: CodeMode;
+  sourcePositionToHtmlElements: Map<string, Array<HTMLElement>>;
+  showAdditionalInliningPosition: boolean;
+  selectionHandler: SelectionHandler;
+  selection: MySelection;
+
+  createViewElement() {
+    const sourceContainer = document.createElement("div");
+    sourceContainer.classList.add("source-container");
+    return sourceContainer;
+  }
+
+  constructor(parent: HTMLElement, broker: SelectionBroker, sourceResolver: SourceResolver, sourceFunction: Source, codeMode: CodeMode) {
+    super(parent);
+    ...
+```
+
+The Abstract Things style allows the V8 engine to easily solve the issue of instantiating multiple types of views. The base abstract class contains two attributes - `container`, `divNode` - that are inherited by the subclasses, as well as an abstract function, `createViewElement()`, that is overridden in the CodeView implementation. The View parent class defines the fields that are required for each type of view, regardless of which type. Understanding how HTML pages work can clarify the reason for these two attributes; 'div' elements are container elements, which can contain text/images and form the basis of HTML webpages. The concrete implementation goes further, and defines the needed attibutes for a `CodeView` - a `codemode`, `source`, and `sourceResolver` among others. This represents the use of the Abstract Things style, in that the problem of displaying multiple view types is broken down into a parent `View` abstraction that is instantiated in many ways, like `CodeView`. The Turbolizer tool becomes easier to understand, as each type of view component directly relates to a parent class, and has attributes and a function that are abstracted from the developer reading through the subclass code.
+
+The V8 engine tool, Turbolizer, is constrained by the Abstract Things programming style. Each type of concrete view element - such as the `CodeView` above - has become bound to the abstract class. The `CodeView` class relies on inheriting two of its class attributes from its parent, the `View` class. Any change to the parent class will change the behaviour of each implemented view component in Turbolizer's source code.
