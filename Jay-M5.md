@@ -49,7 +49,6 @@ class FlaskClient(Client):
                 break
 ```
 
----
 The problem that Flask solves with cookbook style is the need to create a test object . In the above code segment, the solution is the test client created for the purpose of testing. There are two shared objects: `application` and `preserve_context`, of which, `preserve_context` is the object that clarifies the Cookbook programming style in Flask. Initially, a remote test client is created using `__init__()`. On analysis, we find the instance change values when the client enters the application and `__enter__()` is called. When the client exits the application, the shared object is set to `False` again. We see a loop which facilitates pops request contexts until the stack is empty or a non-preserved one us found.
 
 The constraints in the Flask program are the same constraints as Twisted and Node.js, that come with the Cookbook programming style. The class methods do not call other methods or jump to another subsection of the code. Each function is a sub-task and, when called repetitively in the correct order of operations, furthers the problem's solution.
