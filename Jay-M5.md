@@ -150,7 +150,7 @@ class Flask(Scaffold):
         return self.wsgi_app(environ, start_response)
 ```
 
-The closest problem here is the need for fleibility while keeping the codebase templated so modification requirements are minimal.  
+The closest problem here is the need for flexibility while keeping the codebase templated so modification requirements are minimal.  
 As we know, Flask’s architectural drivers include scalability to accommodate complex web apps, and flexibility to be able to build them how a developer pleases. Subclassing Flask is a great facilitator which allowss the developer to build on the existing methods and modify based on individual preferences. This reduces the workload of a developer by providing them with the foundations but allowing them to take their own spin for their respective applications.
 
 The constraints in the Flask code are the ones that Abstract Things programming style brings. The code defines numerous methods which the developer has to pick apart when modifying. Only on implementation, the developer solves each operation's functionality. Here is where the programming style helps as each application's solution may differ, forcing the developer to define the functionality for each method per the problem's scope.
