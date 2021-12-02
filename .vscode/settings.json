@@ -1,0 +1,26 @@
+{
+<<<<<<< HEAD
+  "cSpell.words": [
+    "asyncio",
+    "aynscioreactor",
+    "Bassot",
+    "elif",
+    "epollreactor",
+    "errback",
+    "getstate",
+    "Gevent",
+    "gireactor",
+    "Greenlets",
+    "kqreactor",
+    "libev",
+    "libuv",
+    "multimodule",
+    "pollreactor",
+    "posix",
+    "posixbase",
+    "selectreactor",
+    "setname",
+    "subproblems",
+    "wxreactor"
+  ]
+}
