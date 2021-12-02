@@ -1,0 +1,5 @@
+Reactor:
+
+It waits on the events, then handles them
+Abstracts platform-specific behavior
+Presents interfaces to respond to events in the network stack
